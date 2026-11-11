@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finanzas Personales - Dashboard</title>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Google Fonts: Cormorant Garamond for elegance, Montserrat for readability -->
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="logo">
+            <i class="fa-solid fa-bolt logo-icon"></i> 
+            <div>FINANZAS<br><span style="font-size: 0.7rem; color: var(--text-muted); letter-spacing: 2px; font-family: 'Montserrat', sans-serif;">PERSONALES</span></div>
+        </div>
+        <ul class="nav-menu">
+            <li class="nav-item active" data-target="view-inicio"><i class="fa-solid fa-border-all"></i> Dashboard</li>
+            <li class="nav-item" data-target="view-presupuesto"><i class="fa-solid fa-wallet"></i> Presupuesto</li>
+            <li class="nav-item" data-target="view-metas"><i class="fa-solid fa-bullseye"></i> Metas de Ahorro</li>
+            <li class="nav-item" data-target="view-gastos"><i class="fa-regular fa-credit-card"></i> Gastos Fijos</li>
+        </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        
+        <!-- VISTA: INICIO (DASHBOARD) -->
+        <div id="view-inicio" class="view-section active">
+            <!-- Header & KPIs -->
+            <header class="header-area">
+                <div class="kpi-container">
+                    <div class="kpi-card">
+                        <p>Ingreso Mensual</p>
+                        <h3>S/ 8,000.00</h3>
+                    </div>
+                    <div class="kpi-card">
+                        <p>Gastos del Mes</p>
+                        <h3>S/ 4,100.00</h3>
+                    </div>
+                    <div class="kpi-card">
+                        <p>Ahorro Proyectado</p>
+                        <h3>S/ 3,900.00</h3>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Strict 2x2 Grid -->
+            <div class="dashboard-grid">
+                
+                <!-- Quadrant 1: Line Chart (Savings Trend) -->
+                <div class="panel">
+                    <div class="panel-title">Evolución de Ahorro Semestral</div>
+                    <div class="chart-wrapper">
+                        <canvas id="savingsLineChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Quadrant 2: Bar Chart (Income vs Expense) -->
+                <div class="panel">
+                    <div class="panel-title">Ingresos vs Gastos</div>
+                    <div class="chart-wrapper">
+                        <canvas id="incomeExpenseBarChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Quadrant 3: Doughnut Chart (Expense Distribution) -->
+                <div class="panel">
+                    <div class="panel-title">Distribución de Gastos</div>
+                    <div class="chart-wrapper">
+                        <canvas id="expensesDoughnutChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Quadrant 4: Detailed Expense Table -->
+                <div class="panel">
+                    <div class="panel-title">Historial de Transacciones</div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Fecha</th>
+                                    <th>Descripción</th>
+                                    <th>Categoría</th>
+                                    <th class="amount-col">Monto</th>
+                                    <th>Estado</th>
+                                </tr>
+                            </thead>
+                            <tbody id="table-body">
+                                <!-- Populated by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- VISTA: PRESUPUESTO -->
+        <div id="view-presupuesto" class="view-section">
+            <div class="view-header">
+                <h1>Distribución del Presupuesto</h1>
+            </div>
+            <div class="panel" style="flex: 1; height: 100%;">
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Categoría</th>
+                                <th>Estado de Asignación</th>
+                                <th class="amount-col">Monto Asignado</th>
+                            </tr>
+                        </thead>
+                        <tbody id="full-budget-table-body">
+                            <!-- Llenado por JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- VISTA: METAS DE AHORRO -->
+        <div id="view-metas" class="view-section">
+            <div class="view-header">
+                <h1>Metas de Ahorro Mensual</h1>
+            </div>
+            <div class="progress-container">
+                <i class="fa-solid fa-bolt" style="font-size: 3rem; color: var(--c-yellow); margin-bottom: 1rem; filter: drop-shadow(0 0 15px var(--c-yellow));"></i>
+                <h2>Fondo de Ahorro Principal</h2>
+                <p style="color: var(--text-muted); margin-top: 0.5rem;">Meta general: S/ 3,900.00 / Mes</p>
+                
+                <div class="progress-track">
+                    <div class="progress-fill"></div>
+                </div>
+                
+                <h3 style="color: var(--c-yellow); font-size: 1.8rem; text-shadow: 0 0 10px rgba(255,230,0,0.5);">S/ 3,900.00 <span style="font-size: 1rem; color: var(--text-muted); text-shadow: none;">ahorrados (100%)</span></h3>
+                <p style="color: var(--c-cyan); margin-top: 1rem; font-size: 0.95rem; font-weight: 500;">
+                    <i class="fa-solid fa-check-circle"></i> ¡Felicidades! Has alcanzado tu meta asignada.
+                </p>
+            </div>
+        </div>
+
+        <!-- VISTA: GASTOS FIJOS -->
+        <div id="view-gastos" class="view-section">
+            <div class="view-header">
+                <h1>Gastos Fijos y Obligatorios</h1>
+            </div>
+            <div class="fixed-cards-grid">
+                <div class="fixed-card">
+                    <i class="fa-solid fa-house"></i>
+                    <p style="color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; font-size: 0.85rem;">Vivienda / Alquiler</p>
+                    <h2>S/ 1,000.00</h2>
+                </div>
+                <div class="fixed-card">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                    <p style="color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; font-size: 0.85rem;">Universidad</p>
+                    <h2>S/ 1,000.00</h2>
+                </div>
+                <div class="fixed-card">
+                    <i class="fa-solid fa-bolt"></i>
+                    <p style="color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; font-size: 0.85rem;">Servicios Básicos</p>
+                    <h2>S/ 500.00</h2>
+                </div>
+                <div class="fixed-card">
+                    <i class="fa-solid fa-utensils"></i>
+                    <p style="color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; font-size: 0.85rem;">Familiar (Cenas/Salidas)</p>
+                    <h2>S/ 600.00</h2>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- JavaScript File -->
+    <script src="script.js"></script>
+</body>
+</html>

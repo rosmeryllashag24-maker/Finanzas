@@ -1,0 +1,366 @@
+        :root {
+            /* Palette: Vibrant & Impactful (Neon / Cyber Premium) */
+            --bg-dark: #07070E;         /* Deep Midnight Blue/Black */
+            --bg-panel: rgba(18, 18, 28, 0.75); /* Translucent dark panel */
+            --text-light: #FFFFFF;      /* Pure White */
+            --text-muted: #8A91A5;      /* Slate Gray */
+            
+            --c-pink: #FF007A;          /* Neon Pink (Expenses) */
+            --c-cyan: #00F0FF;          /* Neon Cyan (Income) */
+            --c-yellow: #FFE600;        /* Electric Yellow (Savings) */
+            --c-purple: #B52AFF;        /* Vibrant Purple (Accents) */
+            --c-orange: #FF6B00;
+            --c-mint: #00FFA3;
+            
+            --border-subtle: rgba(255, 255, 255, 0.08); 
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg-dark);
+            background-image: radial-gradient(circle at 100% 0%, rgba(255, 0, 122, 0.15) 0%, transparent 40%),
+                              radial-gradient(circle at 0% 100%, rgba(0, 240, 255, 0.1) 0%, transparent 40%);
+            color: var(--text-light);
+            height: 100vh; /* Strict Panorama Height */
+            display: flex;
+            overflow: hidden; /* Prevent all scroll */
+        }
+
+        /* --- Tipografía Elegante para Títulos y Números --- */
+        h1, h2, h3, .panel-title, .logo {
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        /* --- Sidebar --- */
+        .sidebar {
+            width: 260px;
+            background: rgba(10, 10, 15, 0.85);
+            backdrop-filter: blur(20px);
+            border-right: 1px solid var(--border-subtle);
+            display: flex;
+            flex-direction: column;
+            padding: 2rem 0;
+            flex-shrink: 0;
+            z-index: 10;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            text-align: center;
+            margin-bottom: 2.5rem;
+            color: var(--text-light);
+            letter-spacing: 2px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            font-weight: 600;
+        }
+
+        .logo-icon {
+            font-size: 1.8rem;
+            background: linear-gradient(135deg, var(--c-cyan), var(--c-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 10px rgba(0, 240, 255, 0.4));
+        }
+
+        .nav-menu {
+            list-style: none;
+            flex-grow: 1;
+        }
+
+        .nav-item {
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+            border-left: 3px solid transparent;
+        }
+
+        .nav-item:hover, .nav-item.active {
+            color: var(--text-light);
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .nav-item.active {
+            color: var(--c-cyan);
+            border-left: 3px solid var(--c-cyan);
+            text-shadow: 0 0 10px rgba(0, 240, 255, 0.3);
+        }
+
+        /* --- Main Content --- */
+        .main-content {
+            flex-grow: 1;
+            position: relative;
+            height: 100vh;
+        }
+
+        /* Top Header & KPIs */
+        .header-area {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.2rem;
+            flex-shrink: 0;
+            width: 100%;
+        }
+
+        .kpi-container {
+            display: flex;
+            gap: 1.5rem;
+            width: 100%;
+        }
+
+        .kpi-card {
+            background: var(--bg-panel);
+            backdrop-filter: blur(15px);
+            border: 1px solid var(--border-subtle);
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Subtle glowing top border for cards */
+        .kpi-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 2px;
+        }
+        .kpi-card:nth-child(1)::before { background: var(--c-cyan); box-shadow: 0 0 15px var(--c-cyan); }
+        .kpi-card:nth-child(2)::before { background: var(--c-pink); box-shadow: 0 0 15px var(--c-pink); }
+        .kpi-card:nth-child(3)::before { background: var(--c-yellow); box-shadow: 0 0 15px var(--c-yellow); }
+
+        .kpi-card p {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .kpi-card h3 {
+            font-size: 2.2rem;
+            color: var(--c-cyan);
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-shadow: 0 0 20px rgba(0, 240, 255, 0.4);
+        }
+
+        .kpi-card:nth-child(2) h3 { 
+            color: var(--c-pink); 
+            text-shadow: 0 0 20px rgba(255, 0, 122, 0.4);
+        }
+        .kpi-card:nth-child(3) h3 { 
+            color: var(--c-yellow); 
+            text-shadow: 0 0 20px rgba(255, 230, 0, 0.4);
+        }
+
+        /* --- Dashboard Grid Strict Layout (2x2) --- */
+        .dashboard-grid {
+            flex: 1;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            gap: 1.2rem;
+            min-height: 0;
+        }
+
+        .panel {
+            background: var(--bg-panel);
+            backdrop-filter: blur(15px);
+            border-radius: 16px;
+            padding: 1.2rem;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+            border: 1px solid var(--border-subtle);
+            display: flex;
+            flex-direction: column;
+            min-height: 0; 
+        }
+
+        .panel-title {
+            font-size: 1.4rem;
+            color: var(--text-light);
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-shrink: 0;
+            letter-spacing: 0.5px;
+        }
+
+        .chart-wrapper {
+            position: relative;
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+            flex-grow: 1;
+            min-height: 0;
+        }
+
+        /* --- Data Table --- */
+        .table-container {
+            width: 100%;
+            height: 100%;
+            overflow-y: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+        }
+
+        th {
+            color: var(--text-muted);
+            padding-bottom: 10px;
+            padding-right: 15px; /* Añade separación básica entre todas las columnas */
+            border-bottom: 1px solid var(--border-subtle);
+            font-weight: 500;
+            text-align: left;
+            position: sticky;
+            top: 0;
+            background: rgba(18, 18, 28, 0.95);
+            z-index: 1;
+        }
+
+        td {
+            padding: 12px 15px 12px 0; /* Añade separación lateral a las celdas */
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+            color: var(--text-light);
+        }
+
+        .amount-col {
+            text-align: right;
+            padding-right: 2.5rem !important; /* Fuerza una gran separación específica a la derecha del Monto */
+            font-family: monospace;
+            font-size: 0.95rem;
+            color: var(--text-light);
+        }
+
+        /* Scrollbar */
+        .table-container::-webkit-scrollbar { width: 5px; }
+        .table-container::-webkit-scrollbar-track { background: rgba(0,0,0,0.2); }
+        .table-container::-webkit-scrollbar-thumb { background: var(--c-purple); border-radius: 10px; }
+
+        /* --- Estilos para Vistas Interactivas (Tabs) --- */
+        .view-section {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            padding: 1.5rem 2rem;
+            opacity: 0;
+            pointer-events: none;
+            z-index: 0;
+            display: flex;
+            flex-direction: column;
+            transition: opacity 0.3s ease;
+        }
+        
+        .view-section.active {
+            opacity: 1;
+            pointer-events: auto;
+            z-index: 1;
+        }
+
+        .view-header {
+            margin-bottom: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .view-header h1 {
+            font-size: 2.4rem;
+            font-weight: 600;
+            color: var(--text-light);
+            letter-spacing: 1px;
+            text-shadow: 0 0 15px rgba(255,255,255,0.2);
+        }
+
+        /* Metas de Ahorro UI */
+        .progress-container {
+            background: var(--bg-panel);
+            padding: 3rem;
+            border-radius: 16px;
+            border: 1px solid var(--c-yellow);
+            box-shadow: 0 0 30px rgba(255, 230, 0, 0.15);
+            text-align: center;
+            max-width: 600px;
+            margin: 2rem auto;
+            width: 100%;
+        }
+
+        .progress-track {
+            background: rgba(0,0,0,0.5);
+            height: 20px;
+            border-radius: 10px;
+            margin: 2rem 0;
+            overflow: hidden;
+            border: 1px solid var(--border-subtle);
+        }
+
+        .progress-fill {
+            background: linear-gradient(90deg, var(--c-pink), var(--c-yellow));
+            height: 100%;
+            width: 100%; 
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(255, 230, 0, 0.6);
+        }
+        
+        .progress-container h2 {
+            font-size: 2.2rem;
+            color: var(--text-light);
+        }
+
+        /* Gastos Fijos UI */
+        .fixed-cards-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .fixed-card {
+            background: var(--bg-panel);
+            padding: 2rem;
+            border-radius: 16px;
+            border: 1px solid var(--border-subtle);
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .fixed-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(0, 240, 255, 0.2);
+            border-color: rgba(0, 240, 255, 0.5);
+        }
+
+        .fixed-card i {
+            font-size: 3rem;
+            color: var(--c-cyan);
+            margin-bottom: 1.5rem;
+            filter: drop-shadow(0 0 10px rgba(0, 240, 255, 0.5));
+        }
+
+        .fixed-card h2 {
+            color: var(--c-yellow);
+            font-size: 2.8rem;
+            margin-top: 0.5rem;
+            font-weight: 600;
+            text-shadow: 0 0 15px rgba(255, 230, 0, 0.3);
+        }
